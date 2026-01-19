@@ -2,10 +2,28 @@ import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module.js';
 import cookieParser from 'cookie-parser';
+import { ValidationPipe } from '@nestjs/common';
+import { BadRequestException } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cookieParser());
-  await app.listen(process.env.PORT ?? 3000);
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true,
+    forbidNonWhitelisted: true,
+    transform: true,
+    stopAtFirstError: true,
+    exceptionFactory: (errors) => {
+      const first = errors[0];
+      const firstMsg = first?.constraints ? Object.values(first.constraints)[0] : 'Validation error';
+
+      return new BadRequestException({
+        message: firstMsg,
+        error: "Bad Request",
+        statusCode: 400
+      });
+    },
+  }))
+  await app.listen(process.env.PORT ?? 7000);
 }
 bootstrap();

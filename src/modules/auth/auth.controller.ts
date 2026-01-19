@@ -12,6 +12,7 @@ export class AuthController {
         private tokenService: TokenService
 
     ){}
+
     @Post('/login')
     async login(@Body() body: LoginDto, @Res({passthrough: true}) response: Response){
         const { accessToken, refreshToken, user } = await this.authService.login(body);
@@ -19,11 +20,7 @@ export class AuthController {
             httpOnly: true,
             maxAge: 7 * 24 * 60 * 60 * 1000,    
         })
-
-        return {
-            user,
-            accessToken
-        }
+        return { user, accessToken }
     }
 
     @Post('/reg')
@@ -33,11 +30,7 @@ export class AuthController {
             httpOnly: true,
             maxAge: 7 * 24 * 60 * 60 * 1000,    
         })
-
-        return {
-            user,
-            accessToken
-        }
+        return { user, accessToken }
     }
 
     @Post('/refresh')
