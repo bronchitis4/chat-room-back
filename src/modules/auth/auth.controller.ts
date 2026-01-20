@@ -1,16 +1,15 @@
 import { Body, Controller, Post, Put, Req, Res } from '@nestjs/common';
-import RegistrationDto from './dto/RegistrationDTO.js' 
-import { AuthService } from './auth.service.js';
-import { LoginDto } from './dto/LoginDTO.js';
+import RegistrationDto from './dto/RegistrationDTO' 
+import { AuthService } from './auth.service';
+import { LoginDto } from './dto/LoginDTO';
 import type { Request, response, Response } from 'express';
-import { TokenService } from '../token/token.service.js';
+import { TokenService } from '../token/token.service';
 
 @Controller('auth')
 export class AuthController {
     constructor(
         private authService: AuthService,
         private tokenService: TokenService
-
     ){}
 
     @Post('/login')

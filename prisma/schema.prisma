@@ -12,6 +12,7 @@ model User {
   passwordHash String
   login        String?
   refreshToken RefreshToken?
+  rooms Room[]
 }
 
 model RefreshToken {
@@ -22,4 +23,15 @@ model RefreshToken {
   expiresAt DateTime
   tokenHash String
   user      User     @relation(fields: [userId], references: [id])
+}
+
+model Room {
+  id String @id @default(cuid())
+  name String
+  passwordHash String?
+  maxPlayers Int @default(10)
+  isActive Boolean @default(true)
+  userId Int
+  createdAt DateTime @default(now())
+  user User? @relation(fields: [userId], references: [id])
 }

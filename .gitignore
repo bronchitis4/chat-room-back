@@ -24,6 +24,7 @@ prisma/seed*.sql
 # prisma generated (usually DON'T commit if output is inside src)
 src/generated/
 prisma/generated/
+prisma/migrations/
 
 # OS
 .DS_Store

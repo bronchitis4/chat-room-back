@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import RegistrationDto from './dto/RegistrationDTO.js';
+import RegistrationDto from './dto/RegistrationDTO';
 import * as bcrypt from 'bcrypt'
-import { UserRepository } from '../users/users.repository.js';
-import { TokenService } from '../token/token.service.js';
-import { UsersService } from '../users/users.service.js';
+import { TokenService } from '../token/token.service';
+import { UsersService } from '../users/users.service';
 import { ConflictException, InternalServerErrorException, UnauthorizedException} from '@nestjs/common';
-import { LoginDto } from './dto/LoginDTO.js';
+import { LoginDto } from './dto/LoginDTO';
 
 @Injectable()
 export class AuthService {
